@@ -3,114 +3,259 @@ import bin.classes.can_classes as cc
 import bin.funcs.global_functions as gf
 import bin.formats.vars as vars
 import bin.formats.tables as tables
+import os
 
-def read_can_bus():
-    
-    running = True
-    start_time = gf.get_time("utc")
-    live_can_system = cc.Live_CAN_System()
-    try:
-        while running:
-            live_can_system.read_can_msgs()
-            prev_time = gf.get_time("utc")
-            gf.wait(vars.can_ds)
-    except KeyboardInterrupt: live_can_system.end_live_CAN_system()
 
-def replay_can_bus(filename:str, log_type : str):
+# ---------------------------------------------------------
+# Load CAN data from Excel or CSV depending on logging source
+# ---------------------------------------------------------
+def get_can_from_xlsx(filename: str, logging_source: str):
+    """
+    Loads CAN data from either:
+    - Innomaker Excel logs
+    - GUI CSV Output logs
 
-    running = True
-    can_log = get_can_from_xlsx(filename,log_type)
-    start_time = gf.get_time("utc")
-    prev_time = start_time
-    live_can_system = cc.Live_CAN_System()
-    try:
-        while running:
-            live_can_system.send_can_msgs(can_log.get_msgs(start_time,prev_time))
-            live_can_system.read_can_msgs()
-            if gf.get_time("utc") - start_time > can_log.ts_end: running = False
-            prev_time = gf.get_time("utc")
-            gf.wait(vars.can_ds)
-    except KeyboardInterrupt: live_can_system.end_live_CAN_system()
+    Returns a CAN_log object.
+    """
+    if os.path.isabs(filename) and os.path.exists(filename):
+        path = filename
+    else:
+        # fallback to your helper
+        path = gf.find_file_path(filename)
 
-def get_can_table(filename:str, log_type : str):
-    can_log = get_can_from_xlsx(filename,log_type)
+    if path is None:
+        raise ValueError(f"File not found: {filename}")
+
+    # -----------------------------
+    # Innomaker Excel Log
+    # -----------------------------
+    if logging_source == "Innomaker":
+        file_pd = pd.read_excel(path)
+        can_data = file_pd[vars.innoMakerCANlogColumns].values.tolist()
+
+        # Format: [timestamp, frameid, data_string]
+        # CAN_log will interpret this correctly
+        return cc.CAN_log(can_data, "Innomaker")
+
+    # -----------------------------
+    # GUI CSV Output Log
+    # -----------------------------
+    elif logging_source == "GUI CSV Output":
+        file_pd = pd.read_csv(path)
+
+        # Expect columns: timestamp, id, data
+        can_data = []
+        for _, row in file_pd.iterrows():
+            timestamp = row["timestamp"]
+            frameid = row["id"]
+
+            # Convert "11 22 33" → [0x11, 0x22, 0x33]
+            data_str = str(row["data"]).strip()
+            data_bytes = []
+            if data_str:
+                try:
+                    data_bytes = [int(b, 16) for b in data_str.split()]
+                except:
+                    data_bytes = []
+
+            can_data.append([timestamp, frameid, data_bytes])
+
+        return cc.CAN_log(can_data, "GUI CSV Output")
+
+    else:
+        raise ValueError(f"Unknown logging source: {logging_source}")
+
+
+# ---------------------------------------------------------
+# Print controller table (PP screen)
+# ---------------------------------------------------------
+def get_can_table(filename: str, logging_source: str):
+    """
+    Loads a CAN log and prints the controller table.
+    """
+    can_log = get_can_from_xlsx(filename, logging_source)
     table = can_log.get_cntr_table()
+
+    print("\n=== Controller Table ===")
     for row in table:
         print(row)
+    print("========================\n")
 
-def get_can_from_xlsx(filename:str, log_type : str):
-    
-    file_pd = pd.read_excel(gf.find_file_path(filename))
-    if log_type == "InnoMaker":
-        can_data = file_pd[vars.innoMakerCANlogColumns].values.tolist()
-    CL = cc.CAN_log(can_data, log_type)
-    return CL
 
-def get_frameid_info(frameid : int | hex | str):
+# ---------------------------------------------------------
+# Replay CAN Bus (used by Replay Log screen)
+# ---------------------------------------------------------
+def replay_can_bus(filename: str, logging_source: str):
+    """
+    Replays CAN messages from a log file onto the CAN bus.
+    """
+    running = True
+    can_log = get_can_from_xlsx(filename, logging_source)
 
-    if type(frameid) == int: id = frameid
-    elif type(frameid) == hex: id = int(frameid,16)
-    elif type(frameid) == str:
-        if frameid[0:2] == "0x": id = int(frameid[2:],16)
+    start_time = gf.get_time("utc")
+    prev_time = start_time
 
-    id_bool = format(id,'029b')
-    device_type = int(id_bool[0:5],2)
-    mfg = int(id_bool[5:13],2)
-    api = int(id_bool[13:23],2)
-    device_number = int(id_bool[23:29],2)
-    global_id = [device_type,mfg,device_number]
+    live_can_system = cc.Live_CAN_System()
 
-    return[global_id,api]
+    try:
+        while running:
+            msgs = can_log.get_msgs(start_time, prev_time)
+            live_can_system.send_can_msgs(msgs)
+            live_can_system.read_can_msgs()
 
-def get_device_type(device_type : int, format: str):
-    if format == "int": return(device_type)
-    elif format == "hex": return(hex(device_type))
-    elif format == "str": return(tables.device_types_lookup[device_type])
-    else: return("Format not Recongnized")
+            if gf.get_time("utc") - start_time > can_log.ts_end:
+                running = False
 
-def get_mfg(mfg : int, format: str):
-    if format == "int": return(mfg)
-    elif format == "hex": return(hex(mfg))
-    elif format == "str": return(tables.mfg_lookup[mfg])
-    else: return("Format not Recongnized")
+            prev_time = gf.get_time("utc")
+            gf.wait(vars.can_ds)
 
-def get_id(id : int, format: str):
-    if format == "int": return(id)
-    elif format == "hex": return(hex(id))
-    elif format == "str": return(str(id))
-    else: return("Format not Recongnized")
+    except KeyboardInterrupt:
+        live_can_system.end_live_CAN_system()
 
-def convert_data(input : str | int | float | hex, system, output_type : str["List","Single"], data_format : str["Hex","Hex String","Int"]):
 
-    data_int = 0
-    if system.time_type == "Log" and system.mfg == "InnoMaker" and input[0:3] == "0X|" and len(input[3:]) != 0: data_int = int(input[3:].replace(" ",""),16)
-    elif system.time_type == "Live" and system.mfg == "InnoMaker":
-        data_int = input
+# ---------------------------------------------------------
+# Read CAN Bus (live mode)
+# ---------------------------------------------------------
+def read_can_bus():
+    """
+    Continuously reads from the CAN bus and processes frames.
+    """
+    running = True
+    start_time = gf.get_time("utc")
+    live_can_system = cc.Live_CAN_System()
+
+    try:
+        while running:
+            live_can_system.read_can_msgs()
+            prev_time = gf.get_time("utc")
+            gf.wait(vars.can_ds)
+
+    except KeyboardInterrupt:
+        live_can_system.end_live_CAN_system()
+
+
+# ---------------------------------------------------------
+# Frame ID decoding
+# ---------------------------------------------------------
+def get_frameid_info(frameid: int | str):
+    """
+    Extracts:
+    - device_type (5 bits)
+    - manufacturer (8 bits)
+    - API (10 bits)
+    - device_number (6 bits)
+    """
+
+    if isinstance(frameid, int):
+        id_val = frameid
+    elif isinstance(frameid, str) and frameid.startswith("0x"):
+        id_val = int(frameid[2:], 16)
+    else:
+        id_val = int(frameid)
+
+    id_bits = format(id_val, "029b")
+
+    device_type = int(id_bits[0:5], 2)
+    mfg = int(id_bits[5:13], 2)
+    api = int(id_bits[13:23], 2)
+    device_number = int(id_bits[23:29], 2)
+
+    global_id = [device_type, mfg, device_number]
+
+    return [global_id, api]
+
+
+# ---------------------------------------------------------
+# Lookup helpers
+# ---------------------------------------------------------
+def get_device_type(device_type: int, format: str):
+    if format == "int":
+        return device_type
+    elif format == "hex":
+        return hex(device_type)
+    elif format == "str":
+        return tables.device_types_lookup[device_type]
+    return "Format not recognized"
+
+
+def get_mfg(mfg: int, format: str):
+    if format == "int":
+        return mfg
+    elif format == "hex":
+        return hex(mfg)
+    elif format == "str":
+        return tables.mfg_lookup[mfg]
+    return "Format not recognized"
+
+
+def get_id(id: int, format: str):
+    if format == "int":
+        return id
+    elif format == "hex":
+        return hex(id)
+    elif format == "str":
+        return str(id)
+    return "Format not recognized"
+
+
+# ---------------------------------------------------------
+# Data conversion
+# ---------------------------------------------------------
+def convert_data(input_val, system, output_type: str, data_format: str):
+    """
+    Normalizes data into either:
+    - list of ints
+    - single int
+    """
+    # GUI CSV Output already passes list[int]
+    if isinstance(input_val, list):
+        if output_type == "Single":
+            return int.from_bytes(bytes(input_val), "big")
+        return input_val
+
+    # Innomaker Excel logs
+    if system.time_type == "Log" and system.mfg == "Innomaker":
+        if isinstance(input_val, str) and input_val.startswith("0X|"):
+            hex_str = input_val[3:].replace(" ", "")
+            data_int = int(hex_str, 16)
+        else:
+            data_int = 0
+    else:
+        data_int = input_val
 
     if output_type == "List":
-        data_list = []
-        for i in range(0,16,2): 
-            data_list.append(format(data_int,"016X")[i:i+2])
-        output = []
-        for i in range(0,8):
-            if data_format == "Hex String": output.append(data_list[i])
-            elif data_format == "Int": output.append(int(data_list[i],16))
-            elif data_format == "Hex": output.append(bytes(int(data_list[i],16)))
-    elif output_type == "Single":
-        if data_format == "Hex String": output = format(data_int,"016X")
-        elif data_format == "Int": output = data_int
-        elif data_format == "Hex": output = bytes(data_int)
-        else: output = None
+        hex_str = format(data_int, "016X")
+        bytes_list = [int(hex_str[i:i+2], 16) for i in range(0, 16, 2)]
+        return bytes_list
 
-    return output
+    if output_type == "Single":
+        return data_int
 
-def convert_frameid(input : str | int | float | hex, system, output_type : str["Hex","Hex String","Int"]):
-    
-    if system.time_type == "Log" and system.mfg == "InnoMaker"  and input[0:2] == "0x":
-        frameid_int = int(input[2:],16)
-    elif system.time_type == "Live" and system.mfg == "InnoMaker":
-        frameid_int = input
-    if output_type == "Int": return frameid_int
-    elif output_type == "Hex": return bytes(frameid_int)
-    elif output_type == "Hex String": return format(frameid_int,"016X")
-    else: return None
+    return None
+
+
+# ---------------------------------------------------------
+# Frame ID conversion
+# ---------------------------------------------------------
+def convert_frameid(input_val, system, output_type: str):
+    """
+    Converts frame ID into int, hex string, or bytes.
+    """
+
+    if isinstance(input_val, int):
+        frameid_int = input_val
+
+    elif isinstance(input_val, str) and input_val.startswith("0x"):
+        frameid_int = int(input_val[2:], 16)
+
+    else:
+        frameid_int = int(input_val)
+
+    if output_type == "Int":
+        return frameid_int
+    elif output_type == "Hex":
+        return bytes([frameid_int & 0xFF])
+    elif output_type == "Hex String":
+        return format(frameid_int, "016X")
+
+    return None

@@ -1,0 +1,281 @@
+2026-01-11 12:37:17 [INFO] Logger initialized
+2026-01-11 12:38:06 [INFO] Logger initialized
+2026-01-11 12:43:02 [INFO] Global logger initialized
+2026-01-11 12:45:00 [INFO] Global logger initialized
+2026-01-11 12:48:20 [INFO] Global logger initialized
+2026-01-11 12:48:20 [INFO] Global logger initialized
+2026-01-11 12:48:21 [INFO] go_home
+2026-01-11 12:48:21 [INFO] GUI started
+2026-01-11 12:48:24 [INFO] go_rt
+2026-01-11 12:48:24 [INFO] go_rt
+2026-01-11 12:48:25 [INFO] go_live_can_input
+2026-01-11 12:48:25 [INFO] go_live_can_input
+2026-01-11 12:48:27 [INFO] run_live_can
+2026-01-11 12:48:27 [INFO] run_live_can
+2026-01-11 12:48:27 [INFO] start_monitor
+2026-01-11 12:48:29 [INFO] go_rt
+2026-01-11 12:48:29 [INFO] go_rt
+2026-01-11 12:48:30 [INFO] go_home
+2026-01-11 12:48:30 [INFO] go_home
+2026-01-11 13:17:26 [INFO] Global logger initialized
+2026-01-11 13:17:26 [INFO] Global logger initialized
+2026-01-11 13:20:19 [INFO] Global logger initialized
+2026-01-11 13:20:19 [INFO] Global logger initialized
+2026-01-11 13:20:49 [INFO] Global logger initialized
+2026-01-11 13:20:49 [INFO] Global logger initialized
+2026-01-11 13:21:13 [INFO] Global logger initialized
+2026-01-11 13:21:13 [INFO] Global logger initialized
+2026-01-11 13:21:13 [WARNING] GsUsbBus was not properly shut down
+2026-01-11 13:28:12 [INFO] Global logger initialized
+2026-01-11 13:28:12 [INFO] Global logger initialized
+2026-01-11 13:28:57 [INFO] Global logger initialized
+2026-01-11 13:28:57 [INFO] Global logger initialized
+2026-01-11 13:28:57 [INFO] go_home
+2026-01-11 13:28:57 [INFO] GUI started
+2026-01-11 13:28:59 [INFO] go_rt
+2026-01-11 13:28:59 [INFO] go_rt_setup
+2026-01-11 13:29:02 [INFO] go_home
+2026-01-11 13:29:02 [INFO] go_home
+2026-01-11 13:29:03 [INFO] go_pp
+2026-01-11 13:29:03 [INFO] go_pp
+2026-01-11 13:29:14 [INFO] run_pp
+2026-01-11 13:29:14 [INFO] run_pp
+2026-01-11 13:31:13 [INFO] Global logger initialized
+2026-01-11 13:31:13 [INFO] Global logger initialized
+2026-01-11 13:31:13 [INFO] go_home
+2026-01-11 13:31:13 [INFO] GUI started
+2026-01-11 13:31:14 [INFO] go_pp
+2026-01-11 13:31:14 [INFO] go_pp
+2026-01-11 13:31:21 [INFO] run_pp
+2026-01-11 13:31:21 [INFO] run_pp
+2026-01-11 13:33:29 [INFO] Global logger initialized
+2026-01-11 13:33:29 [INFO] Global logger initialized
+2026-01-11 13:33:29 [INFO] go_home
+2026-01-11 13:33:29 [INFO] GUI started
+2026-01-11 13:33:30 [INFO] go_pp
+2026-01-11 13:33:30 [INFO] go_pp
+2026-01-11 13:33:36 [INFO] run_pp
+2026-01-11 13:33:36 [INFO] run_pp
+2026-01-11 13:35:05 [INFO] Global logger initialized
+2026-01-11 13:35:05 [INFO] Global logger initialized
+2026-01-11 13:35:06 [INFO] go_home
+2026-01-11 13:35:06 [INFO] GUI started
+2026-01-11 13:35:07 [INFO] go_pp
+2026-01-11 13:35:07 [INFO] go_pp
+2026-01-11 13:35:12 [INFO] run_pp
+2026-01-11 13:35:12 [INFO] run_pp
+2026-01-11 13:36:03 [INFO] Global logger initialized
+2026-01-11 13:36:03 [INFO] Global logger initialized
+2026-01-11 13:36:03 [INFO] go_home
+2026-01-11 13:36:03 [INFO] GUI started
+2026-01-11 13:36:04 [INFO] go_pp
+2026-01-11 13:36:04 [INFO] go_pp
+2026-01-11 13:36:09 [INFO] run_pp
+2026-01-11 13:36:09 [INFO] run_pp
+2026-01-11 13:37:11 [INFO] Global logger initialized
+2026-01-11 13:37:11 [INFO] Global logger initialized
+2026-01-11 13:37:11 [INFO] go_home
+2026-01-11 13:37:11 [INFO] GUI started
+2026-01-11 13:37:12 [INFO] go_pp
+2026-01-11 13:37:12 [INFO] go_pp
+2026-01-11 13:37:26 [INFO] run_pp
+2026-01-11 13:37:26 [INFO] run_pp
+2026-01-11 13:42:32 [INFO] Global logger initialized
+2026-01-11 13:42:32 [INFO] Global logger initialized
+2026-01-11 13:42:32 [INFO] go_home
+2026-01-11 13:42:32 [INFO] GUI started
+2026-01-11 13:42:33 [INFO] go_pp
+2026-01-11 13:42:33 [INFO] go_pp
+2026-01-11 13:42:38 [INFO] run_pp
+2026-01-11 13:42:38 [INFO] run_pp
+2026-01-11 13:45:57 [INFO] go_pp
+2026-01-11 13:45:58 [INFO] go_home
+2026-01-11 13:45:58 [INFO] go_home
+2026-01-11 13:46:00 [INFO] Global logger initialized
+2026-01-11 13:46:00 [INFO] Global logger initialized
+2026-01-11 13:46:00 [INFO] go_home
+2026-01-11 13:46:00 [INFO] GUI started
+2026-01-11 13:46:01 [INFO] go_pp
+2026-01-11 13:46:01 [INFO] go_pp
+2026-01-11 13:46:06 [INFO] run_pp
+2026-01-11 13:46:06 [INFO] run_pp
+2026-01-11 13:46:16 [INFO] go_pp
+2026-01-11 13:46:30 [INFO] Global logger initialized
+2026-01-11 13:46:30 [INFO] Global logger initialized
+2026-01-11 13:46:30 [INFO] go_home
+2026-01-11 13:46:30 [INFO] GUI started
+2026-01-11 13:46:31 [INFO] go_pp
+2026-01-11 13:46:31 [INFO] go_pp
+2026-01-11 13:46:39 [INFO] run_pp
+2026-01-11 13:46:39 [INFO] run_pp
+2026-01-11 13:47:28 [INFO] go_pp
+2026-01-11 13:47:29 [INFO] go_home
+2026-01-11 13:47:29 [INFO] go_home
+2026-01-11 13:49:03 [INFO] Global logger initialized
+2026-01-11 13:49:03 [INFO] Global logger initialized
+2026-01-11 13:49:04 [INFO] go_home
+2026-01-11 13:49:04 [INFO] GUI started
+2026-01-11 13:49:05 [INFO] go_pp
+2026-01-11 13:49:05 [INFO] go_pp
+2026-01-11 13:49:12 [INFO] run_pp
+2026-01-11 13:49:12 [INFO] run_pp
+2026-01-11 13:49:16 [INFO] go_pp
+2026-01-11 13:49:17 [INFO] go_home
+2026-01-11 13:49:17 [INFO] go_home
+2026-01-11 13:49:35 [INFO] Global logger initialized
+2026-01-11 13:49:35 [INFO] Global logger initialized
+2026-01-11 13:49:35 [INFO] go_home
+2026-01-11 13:49:35 [INFO] GUI started
+2026-01-11 13:49:36 [INFO] go_pp
+2026-01-11 13:49:36 [INFO] go_pp
+2026-01-11 13:49:42 [INFO] run_pp
+2026-01-11 13:49:42 [INFO] run_pp
+2026-01-11 13:49:45 [INFO] go_pp
+2026-01-11 13:49:46 [INFO] go_home
+2026-01-11 13:49:46 [INFO] go_home
+2026-01-11 13:50:20 [INFO] Global logger initialized
+2026-01-11 13:50:20 [INFO] Global logger initialized
+2026-01-11 13:50:21 [INFO] go_home
+2026-01-11 13:50:21 [INFO] GUI started
+2026-01-11 13:50:22 [INFO] go_pp
+2026-01-11 13:50:22 [INFO] go_pp
+2026-01-11 13:50:26 [INFO] run_pp
+2026-01-11 13:50:26 [INFO] run_pp
+2026-01-11 13:50:30 [INFO] go_pp
+2026-01-11 13:51:30 [INFO] Global logger initialized
+2026-01-11 13:51:30 [INFO] Global logger initialized
+2026-01-11 13:51:30 [INFO] go_home
+2026-01-11 13:51:30 [INFO] GUI started
+2026-01-11 13:51:31 [INFO] go_pp
+2026-01-11 13:51:31 [INFO] go_pp
+2026-01-11 13:51:36 [INFO] run_pp
+2026-01-11 13:51:36 [INFO] run_pp
+2026-01-11 13:51:42 [INFO] go_pp
+2026-01-11 13:51:44 [INFO] go_home
+2026-01-11 13:51:44 [INFO] go_home
+2026-01-11 13:52:25 [INFO] Global logger initialized
+2026-01-11 13:52:25 [INFO] Global logger initialized
+2026-01-11 13:52:25 [INFO] go_home
+2026-01-11 13:52:25 [INFO] GUI started
+2026-01-11 13:52:26 [INFO] go_pp
+2026-01-11 13:52:26 [INFO] go_pp
+2026-01-11 13:52:31 [INFO] run_pp
+2026-01-11 13:52:31 [INFO] run_pp
+2026-01-11 13:52:38 [INFO] go_pp
+2026-01-11 13:53:02 [INFO] Global logger initialized
+2026-01-11 13:53:02 [INFO] Global logger initialized
+2026-01-11 13:53:03 [INFO] go_home
+2026-01-11 13:53:03 [INFO] GUI started
+2026-01-11 13:53:04 [INFO] go_pp
+2026-01-11 13:53:04 [INFO] go_pp
+2026-01-11 13:53:09 [INFO] run_pp
+2026-01-11 13:53:09 [INFO] run_pp
+2026-01-11 13:53:36 [INFO] Global logger initialized
+2026-01-11 13:53:36 [INFO] Global logger initialized
+2026-01-11 13:53:36 [INFO] go_home
+2026-01-11 13:53:36 [INFO] GUI started
+2026-01-11 13:53:38 [INFO] go_pp
+2026-01-11 13:53:38 [INFO] go_pp
+2026-01-11 13:53:42 [INFO] run_pp
+2026-01-11 13:53:42 [INFO] run_pp
+2026-01-11 13:54:02 [INFO] Global logger initialized
+2026-01-11 13:54:02 [INFO] Global logger initialized
+2026-01-11 13:54:02 [INFO] go_home
+2026-01-11 13:54:02 [INFO] GUI started
+2026-01-11 13:54:03 [INFO] go_pp
+2026-01-11 13:54:03 [INFO] go_pp
+2026-01-11 13:54:10 [INFO] run_pp
+2026-01-11 13:54:10 [INFO] run_pp
+2026-01-11 13:54:29 [INFO] Global logger initialized
+2026-01-11 13:54:29 [INFO] Global logger initialized
+2026-01-11 13:54:29 [INFO] go_home
+2026-01-11 13:54:29 [INFO] GUI started
+2026-01-11 13:54:31 [INFO] go_pp
+2026-01-11 13:54:31 [INFO] go_pp
+2026-01-11 13:54:38 [INFO] run_pp
+2026-01-11 13:54:38 [INFO] run_pp
+2026-01-11 13:54:45 [INFO] go_pp
+2026-01-11 13:56:13 [INFO] go_home
+2026-01-11 13:56:13 [INFO] go_home
+2026-01-11 13:56:15 [INFO] Global logger initialized
+2026-01-11 13:56:15 [INFO] Global logger initialized
+2026-01-11 13:56:15 [INFO] go_home
+2026-01-11 13:56:15 [INFO] GUI started
+2026-01-11 13:56:16 [INFO] go_pp
+2026-01-11 13:56:16 [INFO] go_pp
+2026-01-11 13:56:21 [INFO] run_pp
+2026-01-11 13:56:21 [INFO] run_pp
+2026-01-11 13:56:33 [INFO] go_pp
+2026-01-11 13:56:35 [INFO] go_home
+2026-01-11 13:56:35 [INFO] go_home
+2026-01-11 13:58:03 [INFO] Global logger initialized
+2026-01-11 13:58:03 [INFO] Global logger initialized
+2026-01-11 13:58:03 [INFO] go_home
+2026-01-11 13:58:03 [INFO] GUI started
+2026-01-11 13:58:04 [INFO] go_pp
+2026-01-11 13:58:04 [INFO] go_pp
+2026-01-11 13:58:09 [INFO] run_pp
+2026-01-11 13:58:09 [INFO] run_pp
+2026-01-11 13:58:13 [INFO] go_pp
+2026-01-11 13:59:05 [INFO] Global logger initialized
+2026-01-11 13:59:05 [INFO] Global logger initialized
+2026-01-11 13:59:05 [INFO] go_home
+2026-01-11 13:59:05 [INFO] GUI started
+2026-01-11 13:59:06 [INFO] go_pp
+2026-01-11 13:59:06 [INFO] go_pp
+2026-01-11 13:59:12 [INFO] run_pp
+2026-01-11 13:59:12 [INFO] run_pp
+2026-01-11 14:01:43 [INFO] go_pp
+2026-01-11 14:01:45 [INFO] go_home
+2026-01-11 14:01:45 [INFO] go_home
+2026-01-11 14:01:46 [INFO] go_rt
+2026-01-11 14:01:46 [INFO] go_rt_setup
+2026-01-11 14:01:47 [INFO] go_rt_menu
+2026-01-11 14:01:47 [INFO] go_rt_menu
+2026-01-11 14:01:50 [INFO] go_live_can_input
+2026-01-11 14:01:50 [INFO] go_live_can_input
+2026-01-11 14:01:53 [INFO] run_live_can
+2026-01-11 14:01:53 [INFO] run_live_can
+2026-01-11 14:01:53 [INFO] start_monitor
+2026-01-11 14:03:15 [INFO] Global logger initialized
+2026-01-11 14:03:15 [INFO] Global logger initialized
+2026-01-11 14:03:15 [INFO] go_home
+2026-01-11 14:03:15 [INFO] GUI started
+2026-01-11 14:03:16 [INFO] go_rt
+2026-01-11 14:03:16 [INFO] go_rt_setup
+2026-01-11 14:03:17 [INFO] go_rt_menu
+2026-01-11 14:03:17 [INFO] go_rt_menu
+2026-01-11 14:03:19 [INFO] go_auto_detect
+2026-01-11 14:03:19 [INFO] go_auto_detect
+2026-01-11 14:03:21 [INFO] go_rt
+2026-01-11 14:03:21 [INFO] go_rt_setup
+2026-01-11 14:03:23 [INFO] go_rt_menu
+2026-01-11 14:03:23 [INFO] go_rt_menu
+2026-01-11 14:03:24 [INFO] go_replay_log_input
+2026-01-11 14:03:24 [INFO] go_replay_log_input
+2026-01-11 14:03:32 [INFO] go_rt
+2026-01-11 14:03:32 [INFO] go_rt_setup
+2026-01-11 14:03:33 [INFO] go_home
+2026-01-11 14:03:33 [INFO] go_home
+2026-01-11 14:03:57 [INFO] Global logger initialized
+2026-01-11 14:03:57 [INFO] Global logger initialized
+2026-01-11 14:03:57 [INFO] go_home
+2026-01-11 14:03:57 [INFO] GUI started
+2026-01-11 14:04:08 [INFO] go_pp
+2026-01-11 14:04:08 [INFO] go_pp
+2026-01-11 14:04:17 [INFO] run_pp
+2026-01-11 14:04:17 [INFO] run_pp
+2026-01-11 14:04:34 [INFO] go_pp
+2026-01-11 14:04:38 [INFO] run_pp
+2026-01-11 14:04:38 [INFO] run_pp
+2026-01-11 15:28:32 [INFO] Global logger initialized
+2026-01-11 15:28:32 [INFO] Global logger initialized
+2026-01-11 15:28:32 [INFO] go_home
+2026-01-11 15:28:32 [INFO] GUI started
+2026-01-11 15:28:35 [INFO] go_pp
+2026-01-11 15:28:35 [INFO] go_pp
+2026-01-11 15:28:42 [INFO] run_pp
+2026-01-11 15:28:42 [INFO] run_pp
+2026-01-11 15:28:52 [INFO] go_pp
+2026-01-11 15:28:55 [INFO] go_home
+2026-01-11 15:28:55 [INFO] go_home
