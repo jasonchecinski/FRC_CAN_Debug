@@ -6,11 +6,7 @@ import bin.funcs.global_functions as gf
 
 class CAN_bus:
     def __init__(self):
-        self.bus = can.interface.Bus(
-            interface=vars.innoMakerCANtool_interface,
-            channel="1",
-            bitrate=vars.can_baudrate,
-        )
+        self.bus = can.interface.Bus(interface=vars.innoMakerCANtool_interface,channel="0",bitrate=vars.can_baudrate)
         self.reader = can.BufferedReader()
         self.notifier = can.Notifier(self.bus, [self.reader])
 
@@ -85,27 +81,15 @@ class Live_CAN_System:
         self.cb.stop_bus()
 
 class CAN_log:
-    def __init__(self, can_data, logging_source):
-        self.mfg = logging_source
+    def __init__(self, can_data, logging_source: str["Innomaker", "GUI CSV Output"]):
+        self.logging_source = logging_source
         self.time_type = "Log"
-
         self.ts_start = float("inf")
         self.ts_end = 0
+        self.can_frames,self.cntrs_obj,self.cntrs_global_ids = [],[],[]
 
-        self.can_frames = []
-        self.cntrs_obj = []
-        self.cntrs_global_ids = []
-
-        for msg in can_data:
-            timestamp = msg[0]
-            frameid = msg[1]
-            data = msg[2]
-
-            frame = CAN_Frame(self, timestamp, frameid, data)
-            self.can_frames.append(frame)
-
-        for frame in self.can_frames:
-            frame.rel_ts = frame.ts - self.ts_start
+        for msg in can_data: self.can_frames.append(CAN_Frame(self, msg))
+        for frame in self.can_frames: frame.rel_ts = frame.ts - self.ts_start
 
     def add_cntr(self, global_id):
         self.cntrs_global_ids.append(global_id)
@@ -114,21 +98,15 @@ class CAN_log:
     def get_cntr_table(self):
         table = []
         for cntr in self.cntrs_obj:
-            table.append([
-                cntr.get_device_type("str"),
-                cntr.get_mfg("str"),
-                cntr.get_id("str"),
-                cntr.apis
-            ])
+            table.append([cntr.get_device_type("str"),cntr.get_mfg("str"),cntr.get_id("str"),cntr.apis])
         return table
 
     def get_msgs(self, start_time, prev_time):
         msgs = []
         start_rel = prev_time - start_time
-        end_rel = gf.get_time("utc") - start_time
+        end_rel = gf.get_time("epoch") - start_time
 
-        if start_rel == 0:
-            return [self.can_frames[0]]
+        if start_rel == 0: return [self.can_frames[0]]
 
         for frame in self.can_frames:
             if start_rel < frame.rel_ts <= end_rel:
@@ -137,11 +115,11 @@ class CAN_log:
         return msgs
 
 class CAN_Frame:
-    def __init__(self, system, ts, frameid, data):
+    def __init__(self, system, msg):
         self.system = system
-        self.ts = gf.convert_time(ts, "utc")
-        self.frameid = cf.convert_frameid(frameid, system, "Int")
-        self.data = cf.convert_data(data, system, "List", "Int")
+        self.ts = gf.convert_time(msg[0], "epoch")
+        self.frameid = cf.convert_frameid(msg[1],"Int")
+        self.data = cf.convert_data(msg[2], system, "List")
         self.global_id, self.api = cf.get_frameid_info(self.frameid)
         if self.api in vars.bad_apis: return
         self.find_cntr()
@@ -168,11 +146,9 @@ class Controller:
     def __init__(self, system, global_id):
         self.system = system
         self.global_id = global_id
-
         self.device_type = global_id[0]
         self.mfg = global_id[1]
         self.id = global_id[2]
-
         self.apis = []
 
         if self.system.time_type == "Live":

@@ -6,4 +6,4 @@ can_ds = 20/1000
 max_can_read = 20
 bad_apis = [2,992,993,994,995,996,996,997,998,999]
 innoMakerCANtool_interface = "gs_usb"
-innoMakerCANlogColumns = ["TimeStamp","FrameId","FrameData"]
+CANlogColumns = {"Innomaker":["TimeStamp","FrameId","FrameData"],"GUI CSV Output":["timestamp","id","data"]}

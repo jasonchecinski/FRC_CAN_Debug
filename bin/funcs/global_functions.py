@@ -1,12 +1,9 @@
 import os
 import time
 import logging
+from datetime import datetime, timezone
 
 def get_global_logger():
-    """
-    Returns a global logger instance.
-    Creates bin/output_files/logs/app.log if missing.
-    """
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     log_dir = os.path.join(base_dir, "output_files", "logs")
     os.makedirs(log_dir, exist_ok=True)
@@ -24,9 +21,6 @@ def get_global_logger():
     logger.info("Global logger initialized")
     return logger
 
-
-
-
 def find_file_path(filename : str):
     if os.path.isabs(filename) and os.path.exists(filename):
         return filename
@@ -38,20 +32,21 @@ def find_file_path(filename : str):
     raise ValueError(f"File not found: {filename}")
 
 def get_time(output_type : str):
+    epoch = time.time()
+    if output_type == "epoch": return epoch
 
-    utc = time.time()
-
-    if output_type == "utc": return utc
-
-def convert_time(input : str | int | float, output_type : str):
+def convert_time(input : str | int | float, output_type : str["epoch","epoch"]):
 
     if type(input) == str:
-        if "." in input and len(input.split(".")) == 3:
-            utc = float(input.split(".")[0]) + (float(input.split(".")[1]) / 1000) + (float(input.split(".")[2]) / 1_000_000)
+        if "." in input and ":" in input and len(input.split(":")) == 3:
+            #epoch = datetime.strptime(input, "%H:%M:%S.%f").replace(year=datetime.epochnow().year,tzinfo=timezone.utc)
+            epoch = datetime.strptime("2025-12-31 12:31:33.266","%Y-%m-%d %H:%M:%S.%f").replace(tzinfo=timezone.utc).timestamp()*1000
+        elif "." in input and len(input.split(".")) == 3:
+            epoch = float(input.split(".")[0]) + (float(input.split(".")[1]) / 1000) + (float(input.split(".")[2]) / 1_000_000)
     elif type(input) == float:
-        utc = input
+        epoch = input
 
-    if output_type == "utc": return utc
+    if output_type == "epoch": return epoch
 
 def wait_1s(): time.sleep(1)
 def wait(t:float): time.sleep(t)
