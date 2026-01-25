@@ -1,5 +1,4 @@
 # bin/funcs/gui_functions.py
-
 import sys
 from PyQt5.QtWidgets import QApplication
 

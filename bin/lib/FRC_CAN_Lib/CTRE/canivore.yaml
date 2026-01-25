@@ -1,0 +1,29 @@
+device:
+  name: "CANivore"
+  manufacturer: "CTRE"
+  device_type: "Bridge"
+
+api_usage:
+  # APIs that ALWAYS appear on a CANivore
+  always_used:
+    - 1     # CANivore Heartbeat / Status
+    - 10    # CANivore Metadata / Configuration
+
+  # APIs that SOMETIMES appear depending on firmware, diagnostics, or Phoenix 6 metadata
+  sometimes_used:
+    - 390   # Phoenix 6 Diagnostic Frame
+    - 431   # Firmware / Bootloader Diagnostic
+
+  # APIs that NEVER appear on a CANivore
+  # (Used to eliminate TalonFX, SRX, Victor, CANcoder, Pigeon2, PDH, PH, etc.)
+  never_used:
+    - 64     # CANcoder Position
+    - 65     # CANcoder Velocity
+    - 66     # CANcoder Magnet Health
+    - 67     # CANcoder Config
+    - 284    # Pneumatic Hub Status
+    - 299    # PH Solenoid Status
+    - 300    # PH Solenoid Status
+    - 303    # PH Compressor Status
+    - 304    # PH Compressor Diagnostics
+   

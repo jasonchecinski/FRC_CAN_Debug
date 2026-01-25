@@ -1,0 +1,35 @@
+device:
+  name: "SparkMAX"
+  manufacturer: "REV Robotics"
+  device_type: "MotorController"
+
+api_usage:
+  # APIs that ALWAYS appear on a Spark MAX
+  always_used:
+    - 1     # Status Frame 0 (General)
+    - 2     # Status Frame 1 (Motor Velocity)
+    - 3     # Status Frame 2 (Motor Position)
+
+  # APIs that SOMETIMES appear depending on configuration or robot code
+  sometimes_used:
+    - 4     # Status Frame 3 (Analog Sensor)
+    - 5     # Status Frame 4 (Alternate Encoder)
+    - 6     # Status Frame 5 (Duty Cycle Encoder)
+    - 7     # Status Frame 6 (Absolute Encoder)
+    - 8     # Status Frame 7 (Faults)
+    - 9     # Status Frame 8 (Sticky Faults)
+    - 10    # Status Frame 9 (Temperature)
+    - 11    # Status Frame 10 (Voltage/Current)
+    - 12    # Status Frame 11 (Firmware)
+    - 13    # Status Frame 12 (Control)
+    - 14    # Status Frame 13 (Config)
+    - 15    # Status Frame 14 (Diagnostics)
+
+  # APIs that NEVER appear on a Spark MAX
+  never_used:
+    - 64     # CANcoder
+    - 287    # TalonFX
+    - 283    # PDH
+    - 284    # PH
+    - 512    # Pigeon2
+    - 1_000  # Placeholder for any CTRE-only ranges

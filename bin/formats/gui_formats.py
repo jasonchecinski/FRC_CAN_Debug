@@ -1,4 +1,23 @@
-# bin/formats/gui_formats.py
+DARK_STYLE = """
+QWidget {
+    background-color: #1e1e1e;
+    color: #dddddd;
+    font-size: 18px;
+}
+QPushButton {
+    background-color: #333333;
+    padding: 10px;
+    border-radius: 5px;
+}
+QPushButton:hover {
+    background-color: #444444;
+}
+QLineEdit, QComboBox {
+    background-color: #2a2a2a;
+    padding: 6px;
+    border-radius: 4px;
+}
+"""
 
 GUI_CONFIG = {
 
@@ -47,7 +66,7 @@ GUI_CONFIG = {
             "title": "Live CAN Settings",
             "fields": [
                 {"type": "text", "label": "CAN ID (optional)"},
-                {"type": "text", "label": "Baud Rate"},
+                {"type": "dropdown", "label": "Mode", "options": ["Standard CAN", "FRC"]},
                 {"type": "text", "label": "Timeout (s)"}
             ],
             "run_action": "run_live_can",
@@ -59,7 +78,8 @@ GUI_CONFIG = {
             "fields": [
                 {"type": "file", "label": "Select Log File"},
                 {"type": "dropdown", "label": "Logging Source",
-                 "options": ["Innomaker", "GUI CSV Output"]}
+                 "options": ["Innomaker", "GUI CSV Output"]},
+                {"type": "dropdown", "label": "Mode", "options": ["Standard CAN", "FRC"]}
             ],
             "run_action": "run_replay_log",
             "back_action": "go_rt"
@@ -67,33 +87,23 @@ GUI_CONFIG = {
     },
 
     "auto_detect": {
-        "buttons": [
-            {"label": "Start Auto Detect", "action": "start_auto_detect"}
-        ],
-        "bottom_button": {"label": "Back", "action": "go_rt"}
+        "title": "Live Device Auto‑Detection",
+
+        # Column configuration for the Live Auto‑Detect screen
+        "column_configs": {
+            "Standard CAN": {
+                "columns": ["Timestamp", "ID","Byte0", "Byte1", "Byte2", "Byte3",
+                    "Byte4", "Byte5", "Byte6", "Byte7"],
+                "count": 3
+            },
+            "FRC": {
+                "columns": [
+                    "Device Type", "Manufacturer", "ID", "API",
+                    "Byte0", "Byte1", "Byte2", "Byte3",
+                    "Byte4", "Byte5", "Byte6", "Byte7"
+                ],
+                "count": 12
+            }
+        }
     }
-
 }
-
-
-# Global dark theme
-DARK_STYLE = """
-QWidget {
-    background-color: #1e1e1e;
-    color: #dddddd;
-    font-size: 18px;
-}
-QPushButton {
-    background-color: #333333;
-    padding: 10px;
-    border-radius: 5px;
-}
-QPushButton:hover {
-    background-color: #444444;
-}
-QLineEdit, QComboBox {
-    background-color: #2a2a2a;
-    padding: 6px;
-    border-radius: 4px;
-}
-"""

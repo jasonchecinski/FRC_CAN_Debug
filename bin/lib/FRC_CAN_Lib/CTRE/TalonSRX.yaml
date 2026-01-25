@@ -1,0 +1,24 @@
+device:
+  name: "TalonSRX"
+  manufacturer: "CTRE"
+  device_type: "MotorController"
+
+messages:
+
+  287:
+    name: "Status1_General"
+    period_ms: 10
+    fields:
+      - { name: "output_percent", start: 0, length: 2, type: "int16", scale: 0.001 }
+      - { name: "limit_switches", start: 2, length: 1, type: "bitfield" }
+      - { name: "faults", start: 3, length: 1, type: "bitfield" }
+      - { name: "sticky_faults", start: 4, length: 1, type: "bitfield" }
+      - { name: "bus_voltage", start: 5, length: 2, type: "uint16", scale: 0.001, unit: "V" }
+      - { name: "misc_flags", start: 7, length: 1, type: "bitfield" }
+
+  288:
+    name: "Status2_SensorData"
+    period_ms: 20
+    fields:
+      - { name: "sensor_position", start: 0, length: 4, type: "int32" }
+      - { name: "sensor_velocity", start: 4, length: 4, type: "int32" }

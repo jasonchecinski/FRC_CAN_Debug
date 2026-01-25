@@ -1,4 +1,3 @@
-
 device_types_lookup = {
     0: "Broadcast Messages",
     1: "Robot Controller",
@@ -23,7 +22,7 @@ mfg_lookup = {
     1: "NI",
     2: "Luminary Micro",
     3: "DEKA",
-    4: "CTR Electronics",
+    4: "CTRE",
     5: "REV Robotics",
     6: "Grapple",
     7: "MindSensors",

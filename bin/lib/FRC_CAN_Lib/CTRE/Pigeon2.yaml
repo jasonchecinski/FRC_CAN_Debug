@@ -1,0 +1,40 @@
+device:
+  name: "Pigeon2"
+  manufacturer: "CTRE"
+  device_type: "IMU"
+
+api_usage:
+  # These APIs ALWAYS appear on a Pigeon2
+  always_used:
+    - 512   # Yaw/Pitch/Roll
+    - 513   # Angular Velocity
+    - 514   # Accel / Gravity Vector
+
+  # These APIs appear depending on configuration, fusion mode, or robot code
+  sometimes_used:
+    - 515   # Quaternion Data
+    - 516   # Calibration Status
+    - 517   # Temperature / Diagnostics
+    - 518   # Raw Gyro
+    - 519   # Raw Accel
+    - 520   # Magnetometer / Fusion
+    - 390   # Phoenix 6 Diagnostic Frame
+    - 431   # Firmware / Bootloader Diagnostic
+
+  # APIs that NEVER appear on a Pigeon2
+  # (Used to eliminate TalonFX, SRX, Victor, CANcoder, PDH, etc.)
+  never_used:
+    - 64     # CANcoder Position
+    - 65     # CANcoder Velocity
+    - 66     # CANcoder Magnet Health
+    - 67     # CANcoder Config
+    - 287    # TalonFX Status 1
+    - 288    # TalonFX Status 2
+    - 289    # TalonFX Status 3
+    - 290    # TalonFX Status 4
+    - 291    # TalonFX Status 5
+    - 292    # TalonFX Status 6
+    - 283    # PDH Status
+    - 298    # PDH Channel Currents
+    - 313    # PDH Extended Telemetry
+    - 210    # PDH Config

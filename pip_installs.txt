@@ -2,3 +2,4 @@ pip install python-can
 pip install pyqt5
 pip install openpyxl
 pip install pandas
+pip install pyyaml

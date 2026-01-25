@@ -1,0 +1,27 @@
+device:
+  name: "RoboRIO"
+  manufacturer: "NI"
+  device_type: "Controller"
+
+api_usage:
+  # APIs that ALWAYS appear when the roboRIO is active on the CAN bus
+  always_used:
+    - 0     # System heartbeat
+    - 1     # System control / sync
+
+  # APIs that SOMETIMES appear depending on WPILib features
+  sometimes_used:
+    - 2     # System status
+    - 3     # CAN diagnostics
+    - 4     # CAN utilization
+    - 5     # FPGA sync / timestamping
+    - 97     # Custom???
+
+  # APIs that NEVER appear on a roboRIO
+  never_used:
+    - 64     # CANcoder
+    - 287    # TalonFX
+    - 283    # PDH
+    - 284    # PH
+    - 512    # Pigeon2
+    - 1_000  # Placeholder for CTRE-only ranges

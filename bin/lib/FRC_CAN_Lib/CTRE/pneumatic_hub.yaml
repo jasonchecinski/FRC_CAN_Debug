@@ -1,0 +1,51 @@
+device:
+  name: "PneumaticHub"
+  manufacturer: "CTRE"
+  device_type: "Pneumatics"
+
+api_usage:
+  # APIs that ALWAYS appear on a Pneumatic Hub
+  always_used:
+    - 284    # PH Status Frame (compressor state, pressure switch)
+    - 299    # Solenoid Status / Control
+    - 300    # Solenoid Status / Control (bank 2)
+    - 303    # Compressor Status
+    - 304    # Compressor Diagnostics
+
+  # APIs that appear depending on configuration, solenoid activity, or Phoenix 6 metadata
+  sometimes_used:
+    - 301    # Solenoid Feedback
+    - 302    # Solenoid Feedback (bank 2)
+    - 306    # Extended Telemetry
+    - 307    # Extended Telemetry
+    - 309    # Current Monitoring / Faults
+    - 310    # Current Monitoring / Faults
+    - 390    # Phoenix 6 Diagnostic Frame
+    - 431    # Firmware / Bootloader Diagnostic
+    - 210    # PH Config / Control
+
+  # APIs that NEVER appear on a Pneumatic Hub
+  # (Used to eliminate TalonFX, SRX, Victor, CANcoder, Pigeon2, PDH, etc.)
+  never_used:
+    - 64     # CANcoder Position
+    - 65     # CANcoder Velocity
+    - 66     # CANcoder Magnet Health
+    - 67     # CANcoder Config
+    - 287    # TalonFX Status 1
+    - 288    # TalonFX Status 2
+    - 289    # TalonFX Status 3
+    - 290    # TalonFX Status 4
+    - 291    # TalonFX Status 5
+    - 292    # TalonFX Status 6
+    - 283    # PDH Status
+    - 298    # PDH Channel Currents
+    - 313    # PDH Extended Telemetry
+    - 512    # Pigeon2 Orientation
+    - 513    # Pigeon2 Angular Velocity
+    - 514    # Pigeon2 Accel
+    - 515    # Pigeon2 Quaternion
+    - 516    # Pigeon2 Calibration
+    - 517    # Pigeon2 Diagnostics
+    - 518    # Pigeon2 Raw Gyro
+    - 519    # Pigeon2 Raw Accel
+    - 520    # Pigeon2 Magnetometer

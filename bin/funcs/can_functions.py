@@ -66,23 +66,16 @@ def read_can_bus():
 
 def get_frameid_info(frameid: int | str):
 
-
-    if isinstance(frameid, int):
-        id_val = frameid
-    elif isinstance(frameid, str) and frameid.startswith("0x"):
-        id_val = int(frameid[2:], 16)
-    else:
-        id_val = int(frameid)
-
+    if isinstance(frameid, int): id_val = frameid
+    elif frameid.startswith("0x"): id_val = int(frameid[2:], 16)
+    else: id_val = int(frameid)
     id_bits = format(id_val, "029b")
 
     device_type = int(id_bits[0:5], 2)
     mfg = int(id_bits[5:13], 2)
     api = int(id_bits[13:23], 2)
     device_number = int(id_bits[23:29], 2)
-
     global_id = [device_type, mfg, device_number]
-
     return [global_id, api]
 
 def get_device_type(device_type: int, format: str["int", "hex", "str"]):
@@ -105,18 +98,21 @@ def get_id(id: int, format: str["int", "hex", "str"]):
 
 def convert_data(input_val: int | list[int], system, output_type: str["List", "Single"]):
 
-    # Innomaker specific handling
-    if system.logging_source == "Innomaker" and input_val.startswith("0X|"):
-        input_val = input_val[3:]
+    if system.logging_type == "Log":
+        # Innomaker specific handling
+        if system.logging_source == "Innomaker" and isinstance(input_val, str) and input_val.startswith("0X|"):
+            input_val = input_val[3:]
 
-    # Logs
-    if isinstance(input_val, str):
+        # Logs
+        if isinstance(input_val, str):
 
-        if len(input_val) > 0:
-            hex_str = input_val.replace(" ", "")  
-            data_int = int(hex_str, 16)
-        else:
-            data_int = 0
+            if len(input_val) > 0:
+                hex_str = input_val.replace(" ", "")  
+                data_int = int(hex_str, 16)
+            else:
+                data_int = 0
+    elif system.logging_type == "Live":
+        data_int = int.from_bytes(input_val, byteorder="big")
 
     elif isinstance(input_val, list):
         hex_str = ''.join([format(byte, '02X') for byte in input_val])

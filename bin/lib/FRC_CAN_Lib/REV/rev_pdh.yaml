@@ -1,0 +1,48 @@
+device:
+  name: "REV_PDH"
+  manufacturer: "REV"
+  device_type: "PowerDistribution"
+
+api_usage:
+  # APIs that ALWAYS appear on a REV PDH
+  always_used:
+    - 736    # PDH Status Frame (voltage, temp, faults)
+    - 737    # PDH Channel Current Frame
+
+  # APIs that SOMETIMES appear depending on firmware, logging, or robot code
+  sometimes_used:
+    - 96     # PDH Config / Control (0x60)
+    - 752    # PDH Extended Diagnostics / Firmware / Metadata
+
+  # APIs that NEVER appear on a REV PDH
+  # (Used to eliminate Spark MAX, Spark Flex, CTRE devices, sensors, etc.)
+  never_used:
+    - 1      # CANivore
+    - 10     # CANivore
+    - 64     # CTRE CANcoder Position
+    - 65     # CTRE CANcoder Velocity
+    - 66     # CTRE CANcoder Magnet Health
+    - 67     # CTRE CANcoder Config
+    - 284    # CTRE Pneumatic Hub Status
+    - 299    # PH Solenoid Status
+    - 300    # PH Solenoid Status
+    - 303    # PH Compressor Status
+    - 304    # PH Compressor Diagnostics
+    - 283    # CTRE PDH Status
+    - 298    # CTRE PDH Channel Currents
+    - 313    # CTRE PDH Extended Telemetry
+    - 287    # TalonFX Status 1
+    - 288    # TalonFX Status 2
+    - 289    # TalonFX Status 3
+    - 290    # TalonFX Status 4
+    - 291    # TalonFX Status 5
+    - 292    # TalonFX Status 6
+    - 512    # Pigeon2 Orientation
+    - 513    # Pigeon2 Angular Velocity
+    - 514    # Pigeon2 Accel
+    - 515    # Pigeon2 Quaternion
+    - 516    # Pigeon2 Calibration
+    - 517    # Pigeon2 Diagnostics
+    - 518    # Pigeon2 Raw Gyro
+    - 519    # Pigeon2 Raw Accel
+    - 520    # Pigeon2 Magnetometer
