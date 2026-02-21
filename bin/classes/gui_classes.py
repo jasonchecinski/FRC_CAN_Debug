@@ -65,6 +65,9 @@ class LiveCANScreenClass(QWidget):
             return
 
         self.live_can.read_can_msgs()
+        for cntr in self.live_can.cntrs_obj:
+            cntr.ping_device()
+
         frames = self.live_can.can_frames
         table = self.ui.table
 

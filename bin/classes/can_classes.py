@@ -4,10 +4,11 @@ import bin.formats.vars as vars
 import bin.funcs.can_functions as cf
 import bin.funcs.global_functions as gf
 from bin.lib.FRC_CAN_Lib.device_identifier import identify_device
+import bin.formats.vars as vars
 
 class CAN_bus:
     def __init__(self):
-        self.bus = can.interface.Bus(interface=vars.innoMakerCANtool_interface,channel="1",bitrate=vars.can_baudrate)
+        self.bus = can.interface.Bus(interface=vars.innoMakerCANtool_interface,channel="0",bitrate=vars.can_baudrate)
         self.reader = can.BufferedReader()
         self.notifier = can.Notifier(self.bus, [self.reader])
 
@@ -62,7 +63,24 @@ class Live_CAN_System:
         self.cntrs_obj.append(Controller(self, global_id))
 
     def end_live_CAN_system(self):
+        self.save_as_csv()
         self.cb.stop_bus()
+
+    def save_as_csv(self):
+
+        raw_log = [gf.copy_var(vars.std_frame_columns)]
+        frc_log = [gf.copy_var(vars.frc_frame_columns)]
+        device_log = [gf.copy_var(vars.device_log_columns)]
+
+        for frame in self.can_frames:
+            raw_log.append(frame.get_std_table())
+            frc_log.append(frame.get_frc_table())
+        for cntr in self.cntrs_obj:
+            device_log.append(cntr.get_table())
+
+        gf.save_as_csv(raw_log,vars.log_location,"raw_log")
+        gf.save_as_csv(frc_log,vars.log_location,"frc_log")
+        gf.save_as_csv(device_log,vars.log_location,"device_log")
 
 class CAN_log:
     def __init__(self, can_data, logging_source: str["Innomaker", "GUI CSV Output"]):
@@ -120,7 +138,13 @@ class CAN_Frame:
         for cntr in self.system.cntrs_obj:
             if cntr.global_id == self.global_id:
                 self.cntr = cntr
+                cntr.device_seen()
 
+    def get_std_table(self): return [self.ts,self.frameid,self.data]
+    def get_frc_table(self): 
+        if hasattr(self, "cntr"): return [self.ts,self.cntr.model,self.cntr.device_type,self.cntr.mfg,self.cntr.id,self.api,self.data]
+        else: return [self.ts,"Unknown","Unknown","Unknown","Unknown",self.api,self.data]
+        
     def update_log(self):
         if self.ts < self.system.ts_start:
             self.system.ts_start = self.ts

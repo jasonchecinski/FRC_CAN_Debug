@@ -1,7 +1,10 @@
 import os
+import csv
 import time
 import logging
+import copy
 from datetime import datetime, timezone
+import bin.formats.vars as cust_vars
 
 def get_global_logger():
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -34,6 +37,7 @@ def find_file_path(filename : str):
 def get_time(output_type : str):
     epoch = time.time()
     if output_type == "epoch": return epoch
+    elif output_type == "str": return datetime.now().strftime("%y%m%d-%H%M%S")
 
 def convert_time(input : str | int | float, output_type : str["epoch","epoch"]):
 
@@ -48,5 +52,21 @@ def convert_time(input : str | int | float, output_type : str["epoch","epoch"]):
 
     if output_type == "epoch": return epoch
 
+def save_as_csv(input : list | dict, path : str, filename: str):
+
+    if "{date/time}" in path:
+        path = path.replace("{date/time}",get_time("str"))
+    final_path = os.getcwd()+path
+    os.makedirs(final_path, exist_ok=True)    
+
+    if type(input) == list:
+        with open(f"{final_path}\\{filename}.csv", "w", newline="") as f:
+            writer = csv.writer(f)
+            writer.writerows(input)
+
+    elif input == dict:
+        return
+
+def copy_var(var): return copy.deepcopy(var)
 def wait_1s(): time.sleep(1)
 def wait(t:float): time.sleep(t)
